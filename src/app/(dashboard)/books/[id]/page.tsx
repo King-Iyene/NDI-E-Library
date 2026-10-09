@@ -25,14 +25,14 @@ interface Book {
   author: string;
   description: string;
   cover_image: string;
-  category: string;
+  category: { name: string } | string;
   publisher: string;
   published_year: number;
   language: string;
   isbn: string;
   pages: number;
-  viewCount: number;
-  downloadCount: number;
+  views: number;
+  downloads: number;
   file_url: string;
 }
 
@@ -121,14 +121,14 @@ export default function BookDetailPage() {
   }
 
   const details = [
-    { icon: FiLayers, label: "Category", value: book.category },
+    { icon: FiLayers, label: "Category", value: typeof book.category === "object" ? book.category?.name : book.category },
     { icon: FiPrinter, label: "Publisher", value: book.publisher },
     { icon: FiCalendar, label: "Published", value: String(book.published_year) },
     { icon: FiGlobe, label: "Language", value: book.language },
     { icon: FiHash, label: "ISBN", value: book.isbn },
     { icon: FiFileText, label: "Pages", value: String(book.pages) },
-    { icon: FiEye, label: "Views", value: book.viewCount.toLocaleString() },
-    { icon: FiDownload, label: "Downloads", value: book.downloadCount.toLocaleString() },
+    { icon: FiEye, label: "Views", value: (book.views ?? 0).toLocaleString() },
+    { icon: FiDownload, label: "Downloads", value: (book.downloads ?? 0).toLocaleString() },
   ];
 
   return (

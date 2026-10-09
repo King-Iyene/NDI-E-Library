@@ -29,7 +29,7 @@ export default function AdminStudentsPage() {
       );
       const data = await res.json();
       setStudents(data.users || data || []);
-      setTotal(data.total || data.length || 0);
+      setTotal(data.pagination?.total || data.total || data.length || 0);
     } catch {
       toast.error("Failed to fetch students");
     } finally {

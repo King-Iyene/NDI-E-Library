@@ -46,14 +46,14 @@ export default function RegisterPage() {
           email: form.email,
           password: form.password,
           department: form.department || undefined,
-          matricNumber: form.matricNumber || undefined,
+          matricNo: form.matricNumber || undefined,
         }),
       });
 
       const data = await res.json();
 
       if (!res.ok) {
-        toast.error(data.message || "Registration failed");
+        toast.error(data.error || data.message || "Registration failed");
         return;
       }
 

@@ -15,7 +15,7 @@ interface User {
 const PAGE_SIZE = 10;
 
 const roleBadge: Record<string, string> = {
-  "super-admin": "bg-purple-100 text-purple-700",
+  super_admin: "bg-purple-100 text-purple-700",
   admin: "bg-blue-100 text-blue-700",
   student: "bg-green-100 text-green-700",
   user: "bg-gray-100 text-gray-700",
@@ -39,7 +39,7 @@ export default function SuperAdminUsersPage() {
       const res = await fetch(`/api/users?${params}`);
       const data = await res.json();
       setUsers(data.users || data || []);
-      setTotal(data.total || data.length || 0);
+      setTotal(data.pagination?.total || data.total || data.length || 0);
     } catch {
       toast.error("Failed to fetch users");
     } finally {
@@ -78,7 +78,7 @@ export default function SuperAdminUsersPage() {
           className="px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-primary-500 focus:border-transparent outline-none text-sm"
         >
           <option value="">All Roles</option>
-          <option value="super-admin">Super Admin</option>
+          <option value="super_admin">Super Admin</option>
           <option value="admin">Admin</option>
           <option value="student">Student</option>
           <option value="user">User</option>
